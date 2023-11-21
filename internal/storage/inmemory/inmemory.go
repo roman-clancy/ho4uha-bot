@@ -1,6 +1,8 @@
 package inmemory
 
-import "github.com/roman-clancy/ho4uha-bot/internal/model"
+import (
+	"github.com/roman-clancy/ho4uha-bot/internal/model/messages"
+)
 
 type UserData struct {
 	userId     int64
@@ -9,7 +11,7 @@ type UserData struct {
 
 type Category struct {
 	name  string
-	items []model.WishItem
+	items []messages.WishItem
 }
 
 type Storage struct {
@@ -32,7 +34,7 @@ func (s *Storage) AddNewUser(userId int64) (bool, error) {
 		userData.categories = append(userData.categories,
 			&Category{
 				name:  "default",
-				items: make([]model.WishItem, 0),
+				items: make([]messages.WishItem, 0),
 			})
 		s.users[userId] = userData
 		return true, nil
@@ -45,14 +47,14 @@ func (s *Storage) AddUserCategory(userId int64, catName string) (bool, error) {
 	if ok {
 		data.categories = append(data.categories, &Category{
 			name:  catName,
-			items: make([]model.WishItem, 0),
+			items: make([]messages.WishItem, 0),
 		})
 		return true, nil
 	}
 	return false, nil
 }
 
-func (s *Storage) AddWishItemToCategory(userId int64, catName string, item model.WishItem) (bool, error) {
+func (s *Storage) AddWishItemToCategory(userId int64, catName string, item messages.WishItem) (bool, error) {
 	if data, ok := s.users[userId]; ok {
 		for _, cat := range data.categories {
 			if cat.name == catName {
@@ -64,16 +66,16 @@ func (s *Storage) AddWishItemToCategory(userId int64, catName string, item model
 	return false, nil
 }
 
-func (s *Storage) AddWishItem(userId int64, item model.WishItem) (bool, error) {
+func (s *Storage) AddWishItem(userId int64, item messages.WishItem) (bool, error) {
 	return s.AddWishItemToCategory(userId, "default", item)
 }
 
-func (s *Storage) GetWishListByCategory(userId int64) map[string][]model.WishItem {
+func (s *Storage) GetWishListByCategory(userId int64) map[string][]messages.WishItem {
 	userData, ok := s.users[userId]
 	if ok {
-		result := make(map[string][]model.WishItem)
+		result := make(map[string][]messages.WishItem)
 		for _, category := range userData.categories {
-			var a = make([]model.WishItem, len(category.items))
+			var a = make([]messages.WishItem, len(category.items))
 			copy(a, category.items)
 			result[category.name] = a
 		}
