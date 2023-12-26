@@ -34,7 +34,6 @@ func main() {
 	//	bot.
 	//}
 	//
-	//b, err := bot.New("6740884635:AAGONoY1hfYZk99Mu3r-aS3YGB9qnkX_w7w", opts...)
 	//
 	//b.Start(ctx)
 }
