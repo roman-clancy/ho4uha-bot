@@ -1,7 +1,7 @@
 package inmemory
 
 import (
-	"github.com/roman-clancy/ho4uha-bot/internal/model"
+	"github.com/roman-clancy/ho4uha-bot/internal/model/messages"
 	"github.com/stretchr/testify/require"
 	"slices"
 	"testing"
@@ -93,7 +93,7 @@ func TestStorage_AddWishItem(t *testing.T) {
 	t.Run("Should add new wish item to default wishlist", func(t *testing.T) {
 		wishItemName := "Wish Item Name"
 		wishItemUrl := "Wish URL"
-		newItem := model.WishItem{
+		newItem := messages.WishItem{
 			Name: wishItemName,
 			URL:  wishItemUrl,
 		}
@@ -112,7 +112,7 @@ func TestStorage_AddWishItem(t *testing.T) {
 	t.Run("Shouldn't add new wish item to default wishlist when user doesn't exists", func(t *testing.T) {
 		wishItemName := "Wish Item Name"
 		wishItemUrl := "Wish URL"
-		newItem := model.WishItem{
+		newItem := messages.WishItem{
 			Name: wishItemName,
 			URL:  wishItemUrl,
 		}
@@ -140,7 +140,7 @@ func TestStorage_AddWishItemToCategory(t *testing.T) {
 	t.Run("Should add new wish item to specific category", func(t *testing.T) {
 		wishItemName := "Wish Item Name"
 		wishItemUrl := "Wish URL"
-		newItem := model.WishItem{
+		newItem := messages.WishItem{
 			Name: wishItemName,
 			URL:  wishItemUrl,
 		}

@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	Token string `yml:"token"`
+	Env   string `yml:"env"`
 }
 
 func MustLoad() *Config {
